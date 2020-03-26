@@ -5,10 +5,15 @@
     *ngIf="covid.confirmed > 0"
     [latitude]="covid.location.lat" 
     [longitude]="covid.location.lng"
-    [iconUrl]="icon">
+    [iconUrl]="icon"
+    (markerClick) = "markerClick(infoWindow)">
 
-      <agm-info-window
-      [disableAutoPan]="true">
+      <agm-info-window #infoWindow>
+
+        <strong>{{covid.countryregion}} {{covid.provincestate}}</strong>
+        <p>Confirmados: {{covid.confirmed}}</p>
+        <p>Muertos: {{covid.deaths}}</p>
+        <p>Recuperdados: {{covid.recovered}}</p>
         
       </agm-info-window>
 
