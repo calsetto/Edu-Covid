@@ -1,25 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
-
 import { AppComponent } from './app.component';
-
 import { HttpClientModule } from '@angular/common/http'
-
 import { environment } from '../environments/environment';
-import { SigninComponent } from './signin/signin.component';
-
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { MapaComponent } from './mapa/mapa.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SigninComponent,
-    MapaComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +22,8 @@ import { MapaComponent } from './mapa/mapa.component';
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA3qd293fNODeK6lQPChMVhvU2nixxRYjE'
-    })
+    }),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
