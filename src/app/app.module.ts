@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppRoutingModule } from './app-routing.module';
+import { NewLocationService } from "./new-location.service"
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
     }),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [NewLocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

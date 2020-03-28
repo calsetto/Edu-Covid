@@ -3,6 +3,8 @@ import { AgmCoreModule } from '@agm/core';
 import { JsonService } from './json.service'
 import { User } from './user.model';
 import { AuthService } from './auth.service';
+import { NewLocationService } from "./new-location.service"
+import { locatModel } from './location.model';
 
 @Component({
   selector: 'app-root',
@@ -46,12 +48,35 @@ export class AppComponent implements OnInit {
     this.lastSelectedWindow = infoWindow;
   }
 
+  //AGREGANDO LOS NUEVOS CASOS AL MAPA======================================================================
+
+  mapDblClick(event){
+    //console.log(event.coords.lat, event.coords.lng)
+    if(confirm('Estas seguro que quieres agregar un caso de COVID-19 en esta ubicacion?')){
+      
+      this.locationService.addLocat({
+        lat: event.coords.lat,
+        lng: event.coords.lng
+      });
+    }
+    
+  }
+
   //========================================================================================================
+
+  //ELIMINANDO LOS NUEVOS CASOS DEL MAPA====================================================================
+
+  deleteLocat(locat){
+    if(confirm('Estas seguro de eliminar este nuevo caso de COVID-19?')){
+
+      this.locationService.deleteLocat(locat);
+    }  
+  }
 
   //CONSUMIENDO LA API Y OBTENIENDO CURRENTLOCATION=========================================================
   user$: User[];
 
-  constructor(private dataService: JsonService, public auth: AuthService){
+  constructor(private dataService: JsonService, public auth: AuthService, public locationService: NewLocationService){
     if (navigator)
     {
     navigator.geolocation.getCurrentPosition( pos => {
@@ -60,8 +85,10 @@ export class AppComponent implements OnInit {
       });
     }
   }
-
+  locat: locatModel[];
   ngOnInit(){
+
+    this.locat = this.locationService.getLocat();
 
     return this.dataService.getJson()
     .subscribe(data => this.user$ = data)
