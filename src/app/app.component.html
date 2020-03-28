@@ -1,24 +1,28 @@
 <router-outlet></router-outlet>
 
-<div *ngIf ="auth.user$ | async as user; else login">
+<div class="all">
 
-  <div>
-    <h1>
-      Calsetto Covid-19 Map
+  <div class="" style="font:status-bar">
+    <h1 class="text-secondary">
+      Calsetto COVID-MAP
     </h1>
+    <p class="text-secondary pe">Hecho por: Eduardo Mendez</p>
   </div>
+
+<div *ngIf ="auth.user$ | async as user; else login" class="map">
 
   <agm-map [latitude]="lat" [longitude]="lng"
   [zoom]="zoom"
   (mapDblClick)="mapDblClick($event)"
-  [disableDoubleClickZoom]="true">
+  [disableDoubleClickZoom]="true"
+  [styles]="styles">
 
       <ng-container *ngFor="let covid of user$">
         <agm-marker 
         *ngIf="covid.confirmed > 0"
         [latitude]="covid.location.lat" 
         [longitude]="covid.location.lng"
-        
+        [iconUrl]="icon"
         (markerClick) = "markerClick(infoWindow)">
 
               <agm-info-window #infoWindow>
@@ -35,8 +39,12 @@
     <agm-marker
     [latitude]="lat" 
     [longitude]="lng"
-    
+    [iconUrl]="my"
     [title]="'Aqui es donde estas'">
+
+    <agm-info-window>
+      Esta es tu ubicacion actual
+    </agm-info-window>
 
     </agm-marker>
 
@@ -44,6 +52,7 @@
     *ngFor="let locat of locat"
     [latitude]="locat.lat" 
     [longitude]="locat.lng"
+    [iconUrl]="me"
     (markerClick) = "deleteLocat(locat)">
 
     </agm-marker>
@@ -51,22 +60,37 @@
   </ng-container>
 </agm-map>
 
-<div class="formGroup">
-  <button type="button" (click)="auth.signOut()">
-    Log out with Google
+<div class="boton" class="boton">
+  <button type="button" (click)="auth.signOut()" class="btn btn-dark text-secondary">
+    Cerrar sesion
   </button>
 </div>
 
+<div class="lis w-25 p-2">
 
+  <ul class="list-group">
+    <li class="list-group-item bg-secondary text-dark">Como usar el Calsetto COVID-MAP?</li>
+    <li class="list-group-item bg-dark text-secondary">Para hacer zoom: Roll up y Roll down.</li>
+    <li class="list-group-item bg-dark text-secondary">Para agregar un nuevo caso: Doble click en donde quieres agregar el nuevo caso y presionar aceptar.</li>
+    <li class="list-group-item bg-dark text-secondary">Para eliminar un caso de COVID-19: Hacer click sobre el caso de COVID-19 que quiere eliminar y presionar aceptar.</li>
+    <li class="list-group-item bg-secondary text-dark">Recomendaciones para prevenir el COVID-19:</li>
+    <li class="list-group-item bg-dark text-secondary">No salir de casa (Permanecer en cuarentena).</li>
+    <li class="list-group-item bg-dark text-secondary">Lavarse bien las manos.</li>
+    <li class="list-group-item bg-dark text-secondary">Si debe salir por alguna razon, usar mascarilla y guantes.</li>
+  </ul>
+
+</div>
+
+</div>
 </div>
 
 
 
 <ng-template #login>
 
-  <div class="formGroup">
-    <button type="button" (click)= "auth.googleSignin()">
-      Sign in with Google
+  <div class="formGroup" class="botonlog">
+    <button type="button" (click)= "auth.googleSignin()" class="btn btn-dark text-secondary">
+      Inicia sesion con Google
     </button>
   </div>
 

@@ -1,4 +1,47 @@
 agm-map {
-    height: 500px;
-    width: 500px;
+    height: 555px;
+    width: 850px;
 }
+
+.all{
+    margin-top: 5px;
+    align-items: center;
+    background-color: #2D2D35;
+    
+    
+}
+
+h1{
+    
+    margin-left: 230px;
+    font-size: 4em;
+    
+}
+
+.pe{
+    margin-left: 380px;  
+}
+
+.map{
+    margin-top: 30px;
+    margin-left: 60px;
+}
+.boton{
+    position: absolute;
+  left: 1085px;
+  top: 20px;
+}
+
+.lis{
+    position: absolute;
+  left: 980px;
+  top: 103px;
+  
+}
+
+.botonlog{
+    position: absolute;
+  left: 360px;
+  top: 130px;
+}
+
